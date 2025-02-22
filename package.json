@@ -9,7 +9,7 @@
     "lint": "next lint",
     "db:generate": "drizzle-kit generate --config=src/lib/db/config.ts",
     "db:migrate": "drizzle-kit migrate --config=src/lib/db/config.ts",
-    "dev:webhook": "smee --url https://smee.io/liStOJ1CRaXVXP4v --port 3000 --path /api/webhooks/agent"
+    "dev:webhook": "smee --url <YOUR_WEBHOOK_URL> --port 3000 --path /api/webhooks/agent"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.1.12",

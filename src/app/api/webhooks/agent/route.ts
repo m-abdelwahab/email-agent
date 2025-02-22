@@ -38,15 +38,10 @@ export async function POST(request: Request) {
 
     const validatedData = emailSchema.parse(body);
 
-    const result = await generateObject({
-      model: openai("gpt-4o-2024-08-06", { structuredOutputs: true }),
-      schemaName: "email",
-      schemaDescription: "An email summary.",
-      schema: z.object({ summary: z.string(), labels: z.array(z.string()) }),
-      prompt: `Generate a summary and labels for the following email: ${JSON.stringify(
-        validatedData,
-      )}. The summary should be a 1-2 sentences and only generate 1-2 labels that are relevant to the email.`,
-    });
+    // TODO: Generate summary and labels using the AI SDK
+
+    const summary = "This is a test summary";
+    const labels = ["test", "test2"];
 
     await db
       .insert(messages)
@@ -57,8 +52,8 @@ export async function POST(request: Request) {
         to: validatedData.to,
         body: validatedData.body,
         attachments: JSON.stringify(validatedData.attachments),
-        summary: result.object.summary,
-        labels: result.object.labels,
+        summary: summary, // TODO: Replace with the actual summary from the AI SDK
+        labels: labels, // TODO: Replace with the actual labels from the AI SDK
         date: validatedData.date,
       })
       .onConflictDoNothing({ target: messages.id });
@@ -67,8 +62,8 @@ export async function POST(request: Request) {
       status: "success",
       data: {
         email: validatedData,
-        summary: result.object.summary,
-        labels: result.object.labels,
+        summary: summary, // TODO: Replace with the actual summary from the AI SDK
+        labels: labels, // TODO: Replace with the actual labels from the AI SDK
       },
     });
   } catch (error) {
