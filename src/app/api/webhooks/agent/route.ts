@@ -39,6 +39,7 @@ export async function POST(request: Request) {
     const validatedData = emailSchema.parse(body);
 
     // TODO: Generate summary and labels using the AI SDK
+    // Documentation: https://sdk.vercel.ai/docs/reference/ai-sdk-core/generate-object
 
     const summary = "This is a test summary";
     const labels = ["test", "test2"];
